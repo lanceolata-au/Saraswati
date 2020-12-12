@@ -6,4 +6,25 @@
         <LangVersion>8</LangVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+      <PackageReference Include="Avalonia" Version="0.9.12" />
+      <PackageReference Include="Avalonia.Desktop" Version="0.9.12" />
+      <PackageReference Include="Avalonia.ReactiveUI" Version="0.9.12" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="UI\App.xaml" />
+      <None Remove="UI\MainView.xaml" />
+      <None Remove="UI\MainWindow.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <EmbeddedResource Include="UI\MainWindow.xaml" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <None Remove="App.xaml" />
+      <EmbeddedResource Include="App.xaml" />
+    </ItemGroup>
+
 </Project>

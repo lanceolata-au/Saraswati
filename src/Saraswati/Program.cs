@@ -1,12 +1,19 @@
 ﻿using System;
+using Avalonia;
+using Avalonia.Logging.Serilog;
+using Saraswati.UI;
 
 namespace Saraswati
 {
-    class Program
+    internal static class Program
     {
-        static void Main(string[] args)
-        {
-            Console.WriteLine("Hello World!");
-        }
+        [STAThread]
+        static void Main(string[] args) 
+            => BuildAvaloniaApp().StartWithClassicDesktopLifetime(args);
+        
+        static AppBuilder BuildAvaloniaApp()
+            => AppBuilder.Configure<App>()
+                .UsePlatformDetect()
+                .LogToTrace();
     }
 }
