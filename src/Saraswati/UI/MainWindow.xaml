@@ -1,5 +1,12 @@
 <Window xmlns="https://github.com/avaloniaui"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        x:Class="Saraswati.UI.MainWindow">
-    <Button Name="myButton" Content="Hello World"/>
+        x:Class="Saraswati.UI.MainWindow"
+        Title="Saraswati"
+        Background="#37474f"
+        Foreground="#eceff1">
+    <Menu>
+        <MenuItem Header="_File">
+            <MenuItem Header="_Open..." Command="{Binding OpenCommand}"/>
+        </MenuItem>
+    </Menu>
 </Window>
