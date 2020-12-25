@@ -19,7 +19,6 @@ namespace Saraswati.Modbus.Data
                 Value = 0x0
             };
 
-
             return obj;
         }
 
