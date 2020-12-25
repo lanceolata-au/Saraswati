@@ -12,12 +12,14 @@ namespace Saraswati.Modbus.Data
         
         public static Data Create(int address, DataType type)
         {
-            var obj = new Data();
-            
-            obj.Address = address;
-            obj.Type = type;
-            obj.Value = 0x0;
-            
+            var obj = new Data
+            {
+                Address = address, 
+                Type = type, 
+                Value = 0x0
+            };
+
+
             return obj;
         }
 
