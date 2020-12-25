@@ -1,4 +1,5 @@
 ﻿using Gtk;
+using Saraswati.Modbus;
 using Saraswati.UI;
 
 namespace Saraswati
@@ -7,7 +8,7 @@ namespace Saraswati
     {
         static void Main(string[] args)
         {
-            Application.Init();
+            /*Application.Init();
 
             var app = new Application("org.gtksharp.gtksharp", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
@@ -16,7 +17,11 @@ namespace Saraswati
             app.AddWindow(win);
 
             win.Show();
-            Application.Run();
+            Application.Run();*/
+            
+            var modbusTcp = new ModbusTCP();
+            modbusTcp.Start();
+            
         }
     }
 }
