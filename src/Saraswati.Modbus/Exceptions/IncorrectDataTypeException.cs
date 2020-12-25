@@ -4,8 +4,8 @@ namespace Saraswati.Modbus.Exceptions
 {
     public class IncorrectDataTypeException : Exception
     {
-        public IncorrectDataTypeException() 
-            : base("That data type cannot be updated with the supplied type of value")
+        public IncorrectDataTypeException(string address) 
+            : base($"That data type at address {address} cannot be updated with the supplied type of value")
         {
         }
     }

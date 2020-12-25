@@ -25,12 +25,12 @@ namespace Saraswati.Modbus.Data
         {
             if (Type == DataType.Coil || Type == DataType.DiscreteInput)
             {
-                throw new IncorrectDataTypeException();
+                throw new IncorrectDataTypeException((Address + (int)Type*10000).ToString());
             }
 
             if (Type == DataType.InputRegister && !readOnlyOverride)
             {
-                throw new ReadOnlyDataException();
+                throw new ReadOnlyDataException((Address + (int)Type*10000).ToString());
             }
 
             Value = value;
@@ -41,12 +41,12 @@ namespace Saraswati.Modbus.Data
         {
             if (Type == DataType.HoldingRegister || Type == DataType.InputRegister)
             {
-                throw new IncorrectDataTypeException();
+                throw new IncorrectDataTypeException((Address + (int)Type*10000).ToString());
             }
 
             if (Type == DataType.DiscreteInput && !readOnlyOverride)
             {
-                throw new ReadOnlyDataException();
+                throw new ReadOnlyDataException((Address + (int)Type*10000).ToString());
             }
             
             Value = value ? (ushort) 0x1 : (ushort) 0x0;
