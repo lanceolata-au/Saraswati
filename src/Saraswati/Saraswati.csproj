@@ -21,4 +21,8 @@
       <Folder Include="UI" />
     </ItemGroup>
 
+    <ItemGroup>
+      <ProjectReference Include="..\Saraswati.Modbus\Saraswati.Modbus.csproj" />
+    </ItemGroup>
+
 </Project>
