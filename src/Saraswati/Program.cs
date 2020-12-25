@@ -14,8 +14,6 @@ namespace Saraswati
 
             var win = new MainWindow();
             app.AddWindow(win);
-            
-            app.add
 
             win.Show();
             Application.Run();
