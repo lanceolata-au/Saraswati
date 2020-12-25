@@ -109,7 +109,10 @@ namespace Saraswati.Modbus.Data
 
         public void UpdateValue(List<Data> bulkData)
         {
-            
+            foreach (var data in bulkData)
+            {
+                UpdateValue(data);
+            }
         }
         
     }

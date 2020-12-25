@@ -19,7 +19,7 @@ namespace Saraswati.Tests.Unit.Modbus
             TestDataModel01 = DataModel.Create(1);
 
             var tempCoil = Data.Create(1, DataType.Coil);
-            var tempDiscreteInput = Data.Create(1, DataType.DiscreteInput);
+            var tempDiscreteInput = Data.Create(10001, DataType.DiscreteInput);
             
             TestDataModel01.UpdateValue(tempCoil);
             TestDataModel01.UpdateValue(tempDiscreteInput);
@@ -37,7 +37,7 @@ namespace Saraswati.Tests.Unit.Modbus
         [Test]
         public void ReadOnlyDataExceptionDiscreteInput()
         {
-            TestDiscreteInput = Data.Create(1, DataType.DiscreteInput);
+            TestDiscreteInput = Data.Create(10001, DataType.DiscreteInput);
 
             Assert.Throws<ReadOnlyDataException>(() =>
             {
@@ -48,11 +48,33 @@ namespace Saraswati.Tests.Unit.Modbus
         [Test]
         public void ReadOnlyDataExceptionDiscreteInputOverride()
         {
-            TestDiscreteInput = Data.Create(1, DataType.DiscreteInput);
+            TestDiscreteInput = Data.Create(10001, DataType.DiscreteInput);
 
             Assert.DoesNotThrow(() =>
             {
                 TestDiscreteInput.Update(true, true);
+            });
+        }
+        
+        [Test]
+        public void ReadOnlyDataExceptionInputRegister()
+        {
+            TestInputRegister = Data.Create(30001, DataType.InputRegister);
+
+            Assert.Throws<ReadOnlyDataException>(() =>
+            {
+                TestInputRegister.Update(100);
+            });
+        }
+        
+        [Test]
+        public void ReadOnlyDataExceptionDiscreteInputRegisterOverride()
+        {
+            TestInputRegister = Data.Create(30001, DataType.InputRegister);
+
+            Assert.DoesNotThrow(() =>
+            {
+                TestInputRegister.Update(100, true);
             });
         }
     }
