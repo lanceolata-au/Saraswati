@@ -6,4 +6,19 @@
         <LangVersion>8</LangVersion>
     </PropertyGroup>
 
+    <ItemGroup>
+      <None Remove="**\*.glade" />
+      <EmbeddedResource Include="**\*.glade">
+        <LogicalName>%(Filename)%(Extension)</LogicalName>
+      </EmbeddedResource>
+    </ItemGroup>
+
+    <ItemGroup>
+      <PackageReference Include="GtkSharp" Version="3.22.25.128" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Folder Include="UI" />
+    </ItemGroup>
+
 </Project>

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Gtk;
+using Saraswati.UI;
 
 namespace Saraswati
 {
@@ -6,7 +7,16 @@ namespace Saraswati
     {
         static void Main(string[] args)
         {
-            Console.WriteLine("Hello World!");
+            Application.Init();
+
+            var app = new Application("org.gtksharp.gtksharp", GLib.ApplicationFlags.None);
+            app.Register(GLib.Cancellable.Current);
+
+            var win = new MainWindow();
+            app.AddWindow(win);
+
+            win.Show();
+            Application.Run();
         }
     }
 }
