@@ -5,23 +5,6 @@ namespace Saraswati.Modbus.CoreFunctions
 {
     public static class Formatter
     {
-
-        public static int GetFrameEnd(Byte[] bytes)
-        {
-            var frameEnd = 0;
-            
-            for (var i = bytes.Length - 1; i > 0; i--)
-            {
-                if (bytes[i] == 0x02 && bytes[i - 1] == 0x00 && bytes[i - 1] == 0x00)
-                {
-                    frameEnd = i + 1;
-                    break;
-                }
-            }
-
-            return frameEnd;
-        }
-        
         public static string ByteArrayToString(Byte[] bytes)
         {
 

@@ -27,7 +27,7 @@ namespace Saraswati.Modbus
                 string data = null;
 
                 while (true)
-                {
+                {    
                     Console.Write("Waiting for a connection... ");
                     var client = _server.AcceptTcpClient();
                     
@@ -43,18 +43,17 @@ namespace Saraswati.Modbus
                         
                         var frame = new ModbusTCPFrame(bytes);
                         
+#if DEBUG
                         Console.WriteLine("Transaction identifier: {0}", frame.TransactionIdentifier);
-                        
                         Console.WriteLine("Protocol identifier: {0}", frame.ProtocolIdentifier);
-                        
                         Console.WriteLine("Length field: {0}", frame.LengthField);
-                        
                         Console.WriteLine("Unit identifier: {0}", frame.UnitIdentifier);
-
                         Console.WriteLine("Function code: {0}", frame.FunctionCode.GetDescription());
-                        
                         Console.WriteLine("Data: {0}", Formatter.ByteArrayToString(frame.Data));
+                        #endif
 
+                        FunctionMapping.ProcessSlaveFunction(frame);
+                        
                         byte[] msg = {0x00, 0x00, 0x00};
 
                         // Send back a response.
