@@ -1,6 +1,8 @@
-﻿using Gtk;
+﻿using System;
+using Gtk;
 using Saraswati.Modbus;
 using Saraswati.UI;
+using System.Management;
 
 namespace Saraswati
 {

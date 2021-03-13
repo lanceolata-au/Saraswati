@@ -1,3 +1,5 @@
+using System.Linq;
+using Saraswati.Modbus.Data;
 using Saraswati.Modbus.Frame;
 using Saraswati.Modbus.Function.Slave.DataAccess;
 
@@ -8,19 +10,30 @@ namespace Saraswati.Modbus
         public static byte[] ProcessSlaveFunction(ModbusTCPFrame frame)
         {
 
+            DataModel dataModel;
+
+            if (ModbusTCP.Slaves.Any(s => s.Key == frame.UnitIdentifier))
+            {
+                dataModel = ModbusTCP.Slaves.FirstOrDefault(s => s.Key == frame.UnitIdentifier).Value;
+            }
+            else
+            {
+                dataModel = DataModel.Create(frame.UnitIdentifier);
+            }
+
             switch (frame.FunctionCode)
             {
                 case FunctionCode.ReadCoils:
-                    return BitAccess.ReadCoils(frame.Data);
+                    return dataModel.ReadCoils(frame.Data);
                 
                 case FunctionCode.ReadDiscreteInputs:
-                    return BitAccess.ReadDiscreteInputs(frame.Data);
+                    return dataModel.ReadDiscreteInputs(frame.Data);
                 
                 case FunctionCode.WriteSingleCoil:
-                    return BitAccess.WriteSingleCoil(frame.Data);
+                    return dataModel.WriteSingleCoil(frame.Data);
                 
                 case FunctionCode.WriteMultipleCoils:
-                    return BitAccess.WriteMultipleCoils(frame.Data);
+                    return dataModel.WriteMultipleCoils(frame.Data);
             }
             
             return new byte[0];

@@ -1,13 +1,18 @@
 using System;
+using System.Collections.Generic;
 using System.Net.Sockets;
 using System.Text;
+using System.Threading;
 using Saraswati.Modbus.CoreFunctions;
+using Saraswati.Modbus.Data;
 using Saraswati.Modbus.Frame;
 
 namespace Saraswati.Modbus
 {
     public class ModbusTCP
     {
+        internal static Dictionary<uint, DataModel> Slaves = new Dictionary<uint, DataModel>();
+        
         private readonly Int32 _port = 502;
         private TcpListener _server;
         
@@ -42,7 +47,7 @@ namespace Saraswati.Modbus
                         //Console.WriteLine("Received: {0}", Formatter.ByteArrayToString(bytes));
                         
                         var frame = new ModbusTCPFrame(bytes);
-                        
+
 #if DEBUG
                         Console.WriteLine("Transaction identifier: {0}", frame.TransactionIdentifier);
                         Console.WriteLine("Protocol identifier: {0}", frame.ProtocolIdentifier);
@@ -50,15 +55,30 @@ namespace Saraswati.Modbus
                         Console.WriteLine("Unit identifier: {0}", frame.UnitIdentifier);
                         Console.WriteLine("Function code: {0}", frame.FunctionCode.GetDescription());
                         Console.WriteLine("Data: {0}", Formatter.ByteArrayToString(frame.Data));
-                        #endif
-
-                        FunctionMapping.ProcessSlaveFunction(frame);
+#endif
                         
-                        byte[] msg = {0x00, 0x00, 0x00};
+                        byte[] returnData = FunctionMapping.ProcessSlaveFunction(frame);
+
+                        byte transActIdb0 = (byte)frame.TransactionIdentifier,
+                            transActIdb1 = (byte)(frame.TransactionIdentifier>>8);
+
+                        byte unitId = (byte) frame.UnitIdentifier;
+                        
+                        byte function = (byte) frame.FunctionCode;
+
+                        byte dataLenth = (byte)(returnData.Length + 2);
+                        
+                        byte[] header = new byte[] {transActIdb1, transActIdb0, 0x00, 0x00, 0x00, dataLenth, unitId, function};
+
+                        byte[] msg = _combine(header, returnData);
 
                         // Send back a response.
                         stream.Write(msg, 0, msg.Length);
-                        Console.WriteLine("Sent: {0}", msg);
+
+#if DEBUG
+                        Console.WriteLine("Sent: {0}", Formatter.ByteArrayToString(msg));
+#endif
+                        
                     }
 
                     // Shutdown and end connection
@@ -70,17 +90,21 @@ namespace Saraswati.Modbus
             catch (Exception e)
             {
                 Console.WriteLine(e);
-                throw;
             }
             finally
             {
                 // Stop listening for new clients.
                 _server.Stop();
-                
-                Console.WriteLine("\nHit enter to continue...");
-                Console.Read();
             }
             
+        }
+        
+        private static byte[] _combine(byte[] first, byte[] second)
+        {
+            byte[] ret = new byte[first.Length + second.Length];
+            Buffer.BlockCopy(first, 0, ret, 0, first.Length);
+            Buffer.BlockCopy(second, 0, ret, first.Length, second.Length);
+            return ret;
         }
         
     }

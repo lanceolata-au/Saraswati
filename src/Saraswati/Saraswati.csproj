@@ -15,6 +15,7 @@
 
     <ItemGroup>
       <PackageReference Include="GtkSharp" Version="3.22.25.128" />
+      <PackageReference Include="System.Management" Version="5.0.0" />
     </ItemGroup>
 
     <ItemGroup>
