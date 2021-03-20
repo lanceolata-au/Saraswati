@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using System.Linq;
 using Saraswati.Modbus.Data;
 using Saraswati.Modbus.Frame;
@@ -19,6 +20,7 @@ namespace Saraswati.Modbus
             else
             {
                 dataModel = DataModel.Create(frame.UnitIdentifier);
+                ModbusTCP.Slaves.Add(frame.UnitIdentifier,dataModel);
             }
 
             switch (frame.FunctionCode)

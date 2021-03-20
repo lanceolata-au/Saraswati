@@ -66,13 +66,30 @@ namespace Saraswati.Modbus.Function.Slave.DataAccess
         //Code: 0x05
         public static byte[] WriteSingleCoil(this DataModel model, byte[] data)
         {
-            var startAddress = AddressHelper.GetAddress(data);
-            var noToWrite = AddressHelper.GetReadWriteNo(data);
+            var address = AddressHelper.GetAddress(data);
+            var readVal = BitConverter.ToUInt16(data.Skip(2).Take(2).Reverse().ToArray());
+
+            bool value = readVal > 0;
+
+            if (model.Coils.Exists(d => d.Address.Equals(address)))
+            {
+                // ReSharper disable once PossibleNullReferenceException
+                var coil = model.Coils.FirstOrDefault(d => d.Address.Equals(address));
+                // ReSharper disable once PossibleNullReferenceException
+                coil.Update(value);
+            }
+            else
+            {
+                var coil = Data.Data.Create(address, DataType.Coil);
+                coil.Update(value);
+                model.Coils.Add(coil);
+            }
+            
 #if DEBUG
-            Console.WriteLine("Start Address: {0}", startAddress);
-            Console.WriteLine("Writing For: {0}", noToWrite);
+            Console.WriteLine("Write Address: {0}", address);
+            Console.WriteLine("Write Value: {0}", value);
 #endif
-            return new byte[0];
+            return data;
         }
         
         //Code: 0x15
