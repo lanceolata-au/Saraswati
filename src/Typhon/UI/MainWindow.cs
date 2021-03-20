@@ -1,7 +1,7 @@
 using System;
 using Gtk;
 
-namespace Saraswati.UI
+namespace Typhon.UI
 {
     class MainWindow : Window
     {

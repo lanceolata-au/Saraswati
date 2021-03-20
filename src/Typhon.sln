@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typhon", "Typhon\Typhon.csproj", "{5D96F355-08B4-4174-9AE0-EFD54413DE22}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typhon.Modbus", "Typhon.Modbus\Typhon.Modbus.csproj", "{FBE52DB4-4811-4573-88D3-8D4BE98F7540}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Typhon.Tests.Unit", "Typhon.Tests.Unit\Typhon.Tests.Unit.csproj", "{549C39D4-947D-433F-BF3F-D355B2C051D0}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5D96F355-08B4-4174-9AE0-EFD54413DE22}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5D96F355-08B4-4174-9AE0-EFD54413DE22}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5D96F355-08B4-4174-9AE0-EFD54413DE22}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5D96F355-08B4-4174-9AE0-EFD54413DE22}.Release|Any CPU.Build.0 = Release|Any CPU
+		{FBE52DB4-4811-4573-88D3-8D4BE98F7540}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FBE52DB4-4811-4573-88D3-8D4BE98F7540}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FBE52DB4-4811-4573-88D3-8D4BE98F7540}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FBE52DB4-4811-4573-88D3-8D4BE98F7540}.Release|Any CPU.Build.0 = Release|Any CPU
+		{549C39D4-947D-433F-BF3F-D355B2C051D0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{549C39D4-947D-433F-BF3F-D355B2C051D0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{549C39D4-947D-433F-BF3F-D355B2C051D0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{549C39D4-947D-433F-BF3F-D355B2C051D0}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+EndGlobal

@@ -1,13 +1,12 @@
-﻿using Gtk;
-using Saraswati.UI;
+﻿using Typhon.Modbus;
 
-namespace Saraswati
+namespace Typhon
 {
-    class Program
+    public static class Program
     {
         static void Main(string[] args)
         {
-            Application.Init();
+            /*Application.Init();
 
             var app = new Application("org.gtksharp.gtksharp", GLib.ApplicationFlags.None);
             app.Register(GLib.Cancellable.Current);
@@ -16,7 +15,11 @@ namespace Saraswati
             app.AddWindow(win);
 
             win.Show();
-            Application.Run();
+            Application.Run();*/
+            
+            var modbusTcp = new ModbusTCP();
+            modbusTcp.Start();
+            
         }
     }
 }
